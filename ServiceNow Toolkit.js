@@ -34,12 +34,96 @@
                         SEARCH
                     </button>
                 </div>
-                <div style="margin-top: 15px; max-height: 200px;">
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <span id="searchInputMsg" style="display: none; font-size: 10px; font-weight: bold; color: #dc3545; margin: 8px 0px 0px 15px;">Search query is empty</span>
+                    <span id="extendedGlobalSearch" title="Extended Global Search\nPress Shift + Enter" style="display: none; font-size: 10px; font-weight: bold; color: #032D42; margin: 8px 15px 0px auto; cursor: pointer;">Global Search Options</span>
+                </div>
+                <div id="extendedGlobalSearchDiv" style="display: none; margin-top: 15px; max-height: 200px; overflow-y: auto; color: #032D42;">
+                    <ul style="list-style: none; padding: 0; margin: 0; font-weight: bold; font-size: 12px; text-align: right;">
+                        <li id="servicenow_search_engine" style="padding: 5px 10px; cursor: pointer;" title="Search the official ServiceNow documentation and community forums">ServiceNow Search Engine</li>
+                        <li style="padding: 5px 10px;">
+                            <span id="search_sys_properties" title="Search sys_properties by name" style="margin-right: 15px; cursor: pointer;">System Properties</span>
+                            <span id="search_sys_properties_list" title="Search sys_properties by name" style="cursor: pointer;">Run filter</span>
+                        </li>
+                        <li style="padding: 5px 10px;">
+                            <span id="search_sys_update_set" title="Search sys_update_set by name" style="margin-right: 15px; cursor: pointer;">Local Update Sets</span>
+                            <span id="search_sys_update_set_list" title="Search sys_update_set by name" style="cursor: pointer;">Run filter</span>
+                        </li>
+                        <li style="padding: 5px 10px;">
+                            <span id="search_sys_db_object" title="Search sys_db_object by name or label" style="margin-right: 15px; cursor: pointer;">Tables</span>
+                            <span id="search_sys_db_object_list" title="Search sys_db_object by name or label" style="cursor: pointer;">Run filter</span>
+                        </li>
+                        <li style="padding: 5px 10px;">
+                            <span id="search_sys_script" title="Search sys_script by name" style="margin-right: 15px; cursor: pointer;">Business Rules</span>
+                            <span id="search_sys_script_list" title="Search sys_script by name" style="cursor: pointer;">Run filter</span>
+                        </li>
+                        <li style="padding: 5px 10px;">
+                            <span id="search_sysauto" title="Search sysauto by name" style="margin-right: 15px; cursor: pointer;">Scheduled Jobs</span>
+                            <span id="search_sysauto_list" title="Search sysauto by name" style="cursor: pointer;">Run filter</span>
+                        </li>
+                        <li style="padding: 5px 10px;">
+                            <span id="search_sys_script_include" title="Search sys_script_include by name" style="margin-right: 15px; cursor: pointer;">Script Includes</span>
+                            <span id="search_sys_script_include_list" title="Search sys_script_include by name" style="cursor: pointer;">Run filter</span>
+                        </li>
+                        <li style="padding: 5px 10px;">
+                            <span id="search_sysrule_assignment" title="Search sysrule_assignment by name" style="margin-right: 15px; cursor: pointer;">Assignment Rules</span>
+                            <span id="search_sysrule_assignment_list" title="Search sysrule_assignment by name" style="cursor: pointer;">Run filter</span>
+                        </li>
+                        <li style="padding: 5px 10px;">
+                            <span id="search_sys_script_client" title="Search sys_script_client by name" style="margin-right: 15px; cursor: pointer;">Client Scripts</span>
+                            <span id="search_sys_script_client_list" title="Search sys_script_client by name" style="cursor: pointer;">Run filter</span>
+                        </li>
+                        <li style="padding: 5px 10px;">
+                            <span id="search_sys_ui_action" title="Search sys_ui_action by name or action_name" style="margin-right: 15px; cursor: pointer;">UI Actions</span>
+                            <span id="search_sys_ui_action_list" title="Search sys_ui_action by name or action_name" style="cursor: pointer;">Run filter</span>
+                        </li>
+                        <li style="padding: 5px 10px;">
+                            <span id="search_cmdb_ci_service_business" title="Search cmdb_ci_service_business by name" style="margin-right: 15px; cursor: pointer;">Business Services</span>
+                            <span id="search_cmdb_ci_service_business_list" title="Search cmdb_ci_service_business by name" style="cursor: pointer;">Run filter</span>
+                        </li>
+                        <li style="padding: 5px 10px;">
+                            <span id="search_service_offering" title="Search service_offering by name" style="margin-right: 15px; cursor: pointer;">Service Offerings</span>
+                            <span id="search_service_offering_list" title="Search service_offering by name" style="cursor: pointer;">Run filter</span>
+                        </li>
+                        <li style="padding: 5px 10px;">
+                            <span id="search_sc_cat_item_producer" title="Search sc_cat_item_producer by name" style="margin-right: 15px; cursor: pointer;">Record Producers</span>
+                            <span id="search_sc_cat_item_producer_list" title="Search sc_cat_item_producer by name" style="cursor: pointer;">Run filter</span>
+                        </li>
+                        <li style="padding: 5px 10px;">
+                            <span id="search_sys_user_group" title="Search sys_user_group by name" style="margin-right: 15px; cursor: pointer;">Groups</span>
+                            <span id="search_sys_user_group_list" title="Search sys_user_group by name" style="cursor: pointer;">Run filter</span>
+                        </li>
+                        <li style="padding: 5px 10px;">
+                            <span id="search_sys_user" title="Search sys_user by name, user_name, or email" style="margin-right: 15px; cursor: pointer;">Users</span>
+                            <span id="search_sys_user_list" title="Search sys_user by name, user_name, or email" style="cursor: pointer;">Run filter</span>
+                        </li>
+                    </ul>
+                </div>
+                <div id="shortcutsDiv" style="margin-top: 15px; max-height: 200px; overflow-y: auto; color: #032D42;">
                     <ul style="list-style: none; padding: 0; margin: 0; font-weight: bold; font-size: 12px;">
                         <li style="padding: 5px 10px"><a href="${window.location.origin}/sys_update_set.do"
                             style="color: #032D42; text-decoration: none;" target="_blank">Create new update set ➚</a></li>
                         <li style="padding: 5px 10px"><a href="${window.location.origin}/cancel_my_transactions.do"
                             style="color: #032D42; text-decoration: none;" target="_blank">Cancel Transactions (cancel_my_transactions.do) ➚</a></li>
+                        <li style="padding: 5px 10px; margin-top: 15px">SYSTEM TRANSACTIONS</li>
+                        <li style="padding: 5px 10px"><a href="${window.location.origin}/v_transaction_list.do?sysparm_query=ORDERBYASCsys_created_on"
+                            style="color: #032D42; text-decoration: none;" target="_blank">Active Transactions ➚</a></li>
+                        <li style="padding: 5px 10px"><a href="${window.location.origin}/loading_transactions.do"
+                            style="color: #032D42; text-decoration: none;" target="_blank">Active Cluster Transactions ➚</a></li>
+                        <li style="padding: 5px 10px"><a href="${window.location.origin}/sys_transaction_pattern_list.do?sysparm_query=window_endISEMPTY^window_startISEMPTY^firstONLast 2 hours@javascript:gs.beginningOfLast2Hours()@javascript:gs.endOfLast2Hours()^ORDERBYDESCaverage"
+                            style="color: #032D42; text-decoration: none;" target="_blank">Recent Slow Transactions ➚</a></li>
+                        <li style="padding: 5px 10px"><a href="${window.location.origin}/syslog_transaction_list.do?sysparm_query=urlSTARTSWITH/^sql_count>0^response_time>=5000^sys_created_by!=guest^sys_created_onONLast 2 hours@javascript:gs.beginningOfLast2Hours()@javascript:gs.endOfLast2Hours()^ORDERBYDESCresponse_time"
+                            style="color: #032D42; text-decoration: none;" target="_blank">Recent Transaction Logs ➚</a></li>
+                        <li style="padding: 5px 10px"><a href="${window.location.origin}/syslog_transaction_list.do?sysparm_query=urlSTARTSWITHJOB^response_time>=5000^sys_created_onONLast 2 hours@javascript:gs.beginningOfLast2Hours()@javascript:gs.endOfLast2Hours()^ORDERBYDESCresponse_time"
+                            style="color: #032D42; text-decoration: none;" target="_blank">Recent Background Transactions ➚</a></li>
+                        <li style="padding: 5px 10px"><a href="${window.location.origin}/syslog_transaction_list.do?sysparm_query=client_transaction=true^response_time>=5000^sys_created_onONLast 2 hours@javascript:gs.beginningOfLast2Hours()@javascript:gs.endOfLast2Hours()^ORDERBYDESCresponse_time"
+                            style="color: #032D42; text-decoration: none;" target="_blank">Recent Client Transactions ➚</a></li>
+                        <li style="padding: 5px 10px"><a href="${window.location.origin}/sys_query_pattern_list.do?sysparm_query=window_endISEMPTY^window_startISEMPTY^average>=5000^sys_created_onONLast 7 days@javascript:gs.beginningOfLast7Days()@javascript:gs.endOfLast7Days()^ORDERBYDESCaverage"
+                            style="color: #032D42; text-decoration: none;" target="_blank">Slow Queries ➚</a></li>
+                        <li style="padding: 5px 10px"><a href="${window.location.origin}/sys_script_pattern_list.do?sysparm_query=window_endISEMPTY^window_startISEMPTY^average>=5000^sys_created_onONLast 7 days@javascript:gs.beginningOfLast7Days()@javascript:gs.endOfLast7Days()^ORDERBYDESCaverage"
+                            style="color: #032D42; text-decoration: none;" target="_blank">Slow Scripts ➚</a></li>
+                        <li style="padding: 5px 10px"><a href="${window.location.origin}/syslog_list.do?sysparm_query=sys_created_onONLast 2 hours@javascript:gs.beginningOfLast2Hours()@javascript:gs.endOfLast2Hours()^ORDERBYDESCsys_created_on"
+                            style="color: #032D42; text-decoration: none;" target="_blank">Recent Logs ➚</a></li>
                     </ul>
                 </div>
             </div>
@@ -159,6 +243,16 @@
             return `${urlOrigin}/text_search_exact_match.do?sysparm_search=${encodeURIComponent(query)}`;
         }
 
+        function setSearchInputMsg(message = '') {
+            const searchInputMsg = document.getElementById('searchInputMsg');
+            if (message == '') {
+                searchInputMsg.style.display = 'none';
+            } else {
+                searchInputMsg.style.display = 'block';
+            }
+            searchInputMsg.textContent = message;
+        }
+
         document.getElementById('sntk-search-btn').onclick = () => {
             const query = globalSearch.value.trim().toLowerCase();
             if (query) {
@@ -196,10 +290,134 @@
                 } else {
                     newURL = getTextSearchURL(window.location.origin, query);
                 }
+                setSearchInputMsg();
                 if (newURL) {
                     overlay.remove();
                     window.open(newURL, '_blank');
                 }
+            } else {
+                setSearchInputMsg('Search query is empty');
+            }
+        };
+
+        function toggleExtendedGlobalSearch() {
+            const extendedGlobalSearchDiv = document.getElementById('extendedGlobalSearchDiv');
+            const shortcutsDiv = document.getElementById('shortcutsDiv');
+            if (extendedGlobalSearchDiv.style.display == 'none') {
+                extendedGlobalSearchDiv.style.display = 'block';
+                shortcutsDiv.style.display = 'none';
+            } else {
+                extendedGlobalSearchDiv.style.display = 'none';
+                shortcutsDiv.style.display = 'block';
+            }
+        }
+
+        document.getElementById('extendedGlobalSearch').onclick = () => {
+            toggleExtendedGlobalSearch();
+        };
+
+        document.getElementById('servicenow_search_engine').onclick = () => {
+            const query = globalSearch.value.trim();
+            if (query == '') {
+                setSearchInputMsg('Search query is empty');
+            } else {
+                overlay.remove();
+                window.open(`https://cse.google.com/cse?cx=e2f9fd84159ae4672&q=${encodeURIComponent(query)}`, '_blank');
+            }
+        };
+
+        function extendedGlobalSearch(table) {
+            const query = globalSearch.value.trim();
+            if (query == '') {
+                setSearchInputMsg('Search query is empty');
+            } else {
+                overlay.remove();
+                if (query.endsWith('_list')) {
+                    window.open(`${window.location.origin}/${table}.do?sysparm_filter_pinned=true&sysparm_query=nameLIKE${encodeURIComponent(query)}`, '_blank');
+                } else {
+                    window.open(`${window.location.origin}/${table}.do?sysparm_query=name=${encodeURIComponent(query)}`, '_blank');
+                }
+            }
+        };
+
+        document.getElementById('search_sys_properties').onclick = () => extendedGlobalSearch('sys_properties');
+        document.getElementById('search_sys_update_set').onclick = () => extendedGlobalSearch('sys_update_set');
+        document.getElementById('search_sys_script').onclick = () => extendedGlobalSearch('sys_script');
+        document.getElementById('search_sysauto').onclick = () => extendedGlobalSearch('sysauto');
+        document.getElementById('search_sys_script_include').onclick = () => extendedGlobalSearch('sys_script_include');
+        document.getElementById('search_sysrule_assignment').onclick = () => extendedGlobalSearch('sysrule_assignment');
+        document.getElementById('search_sys_script_client').onclick = () => extendedGlobalSearch('sys_script_client');
+        document.getElementById('search_cmdb_ci_service_business').onclick = () => extendedGlobalSearch('cmdb_ci_service_business');
+        document.getElementById('search_service_offering').onclick = () => extendedGlobalSearch('service_offering');
+        document.getElementById('search_sc_cat_item_producer').onclick = () => extendedGlobalSearch('sc_cat_item_producer');
+        document.getElementById('search_sys_user_group').onclick = () => extendedGlobalSearch('sys_user_group');
+
+        document.getElementById('search_sys_properties_list').onclick = () => extendedGlobalSearch('sys_properties_list');
+        document.getElementById('search_sys_update_set_list').onclick = () => extendedGlobalSearch('sys_update_set_list');
+        document.getElementById('search_sys_script_list').onclick = () => extendedGlobalSearch('sys_script_list');
+        document.getElementById('search_sysauto_list').onclick = () => extendedGlobalSearch('sysauto_list');
+        document.getElementById('search_sys_script_include_list').onclick = () => extendedGlobalSearch('sys_script_include_list');
+        document.getElementById('search_sysrule_assignment_list').onclick = () => extendedGlobalSearch('sysrule_assignment_list');
+        document.getElementById('search_sys_script_client_list').onclick = () => extendedGlobalSearch('sys_script_client_list');
+        document.getElementById('search_cmdb_ci_service_business_list').onclick = () => extendedGlobalSearch('cmdb_ci_service_business_list');
+        document.getElementById('search_service_offering_list').onclick = () => extendedGlobalSearch('service_offering_list');
+        document.getElementById('search_sc_cat_item_producer_list').onclick = () => extendedGlobalSearch('sc_cat_item_producer_list');
+        document.getElementById('search_sys_user_group_list').onclick = () => extendedGlobalSearch('sys_user_group_list');
+
+        document.getElementById('search_sys_db_object').onclick = () => {
+            const query = globalSearch.value.trim();
+            if (query == '') {
+                setSearchInputMsg('Search query is empty');
+            } else {
+                overlay.remove();
+                window.open(`${window.location.origin}/sys_db_object.do?sysparm_query=name=${encodeURIComponent(query)}^ORlabel=${encodeURIComponent(query)}`, '_blank');
+            }
+        };
+        document.getElementById('search_sys_db_object_list').onclick = () => {
+            const query = globalSearch.value.trim();
+            if (query == '') {
+                setSearchInputMsg('Search query is empty');
+            } else {
+                overlay.remove();
+                window.open(`${window.location.origin}/sys_db_object_list.do?sysparm_filter_pinned=true&sysparm_query=nameLIKE${encodeURIComponent(query)}^ORlabelLIKE${encodeURIComponent(query)}`, '_blank');
+            }
+        };
+
+        document.getElementById('search_sys_ui_action').onclick = () => {
+            const query = globalSearch.value.trim();
+            if (query == '') {
+                setSearchInputMsg('Search query is empty');
+            } else {
+                overlay.remove();
+                window.open(`${window.location.origin}/sys_ui_action.do?sysparm_query=name=${encodeURIComponent(query)}^ORaction_name=${encodeURIComponent(query)}`, '_blank');
+            }
+        };
+        document.getElementById('search_sys_ui_action_list').onclick = () => {
+            const query = globalSearch.value.trim();
+            if (query == '') {
+                setSearchInputMsg('Search query is empty');
+            } else {
+                overlay.remove();
+                window.open(`${window.location.origin}/sys_ui_action_list.do?sysparm_filter_pinned=true&sysparm_query=nameLIKE${encodeURIComponent(query)}^ORaction_nameLIKE${encodeURIComponent(query)}`, '_blank');
+            }
+        };
+
+        document.getElementById('search_sys_user').onclick = () => {
+            const query = globalSearch.value.trim();
+            if (query == '') {
+                setSearchInputMsg('Search query is empty');
+            } else {
+                overlay.remove();
+                window.open(`${window.location.origin}/sys_user.do?sysparm_query=name=${encodeURIComponent(query)}^ORuser_name=${encodeURIComponent(query)}^ORemail=${encodeURIComponent(query)}`, '_blank');
+            }
+        };
+        document.getElementById('search_sys_user_list').onclick = () => {
+            const query = globalSearch.value.trim();
+            if (query == '') {
+                setSearchInputMsg('Search query is empty');
+            } else {
+                overlay.remove();
+                window.open(`${window.location.origin}/sys_user_list.do?sysparm_filter_pinned=true&sysparm_query=nameLIKE${encodeURIComponent(query)}^ORuser_nameLIKE${encodeURIComponent(query)}^ORemailLIKE${encodeURIComponent(query)}`, '_blank');
             }
         };
 
@@ -267,11 +485,24 @@
 
         const debouncedLoadCommonQueries = debounce(loadCommonQueries, 100);
         globalSearch.oninput = (e) => {
-            debouncedLoadCommonQueries(e.target.value.trim());
+            const query = e.target.value.trim();
+            debouncedLoadCommonQueries(query);
+            setSearchInputMsg();
+            if (query == '') {
+                document.getElementById('extendedGlobalSearch').style.display = 'none';
+            } else {
+                document.getElementById('extendedGlobalSearch').style.display = 'block';
+            }
         };
 
         globalSearch.onkeydown = (e) => {
-            if (e.key === 'Enter') document.getElementById('sntk-search-btn').click();
+            if (e.key === 'Enter') {
+                if (e.shiftKey) {
+                    toggleExtendedGlobalSearch();
+                } else {
+                    document.getElementById('sntk-search-btn').click();
+                }
+            }
         };
     } else {
         alert("You're not in a service-now.com instance");
