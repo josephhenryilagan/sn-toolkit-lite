@@ -179,7 +179,7 @@
                 } else if (query.endsWith('.filter')) {
                     let table = query.replace('.filter', '');
                     if (TABLE_REGEX.test(`${table}_list.do`)) {
-                        newURL = `${window.location.origin}/${table}_list.do?sysparm_filter_only=true`;
+                        newURL = `${window.location.origin}/${table}_list.do?sysparm_filter_only=true&sysparm_filter_pinned=true`;
                     } else {
                         newURL = getTextSearchURL(window.location.origin, query);
                     }
