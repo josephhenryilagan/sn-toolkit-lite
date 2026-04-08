@@ -49,7 +49,7 @@
             { label: 'Inactive Users with directly assigned roles ➚', path: '/sys_user_has_role_list.do?sysparm_query=user.active=false^inherited=false^ORDERBYuser.name^ORDERBYrole.name^GROUPBYuser' },
             { label: 'Inactive Users with assigned groups ➚', path: '/sys_user_grmember_list.do?sysparm_query=user.active=false^ORDERBYuser.name^ORDERBYgroup.name^GROUPBYuser' },
             { label: 'Dormant Users ➚', path: '/sys_user_list.do?sysparm_query=active=true^last_login_timeNOTONLast 90 days@javascript:gs.beginningOfLast90Days()@javascript:gs.endOfLast90Days()^ORDERBYlast_login_time' },
-            { label: 'Groups without members ➚', path: '/sys_user_group_list.do?sysparm_query=RLQUERYsys_user_grmember.group,=0^ENDRLQUERY' },
+            { label: 'Groups without members ➚', path: '/sys_user_group_list.do?sysparm_query=RLQUERYsys_user_grmember.group,=0^ENDRLQUERY^ORDERBYname' },
             { label: 'Inactive Groups with assigned roles ➚', path: '/sys_group_has_role_list.do?sysparm_query=group.active=false^ORDERBYgroup.name^ORDERBYrole.name^GROUPBYgroup' },
             { label: 'Inactive Groups with members ➚', path: '/sys_user_grmember_list.do?sysparm_query=group.active=false^ORDERBYgroup.name^ORDERBYuser.name^GROUPBYgroup' },
             { label: 'Stuck Workflow contexts ➚', path: '/wf_context_list.do?sysparm_query=state=faulted^ORDERBYstarted^GROUPBYworkflow_version' },
