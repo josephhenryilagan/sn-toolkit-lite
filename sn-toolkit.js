@@ -2,14 +2,14 @@
     const subdomain = window.location.hostname.replace('.service-now.com', '');
     const excludedURLs = ['www', 'signon', 'sso', 'auth', 'angel', 'angeldemo', 'gld', 'clabs', 'developer', 'support'];
     if (window.location.hostname.endsWith('service-now.com') && !excludedURLs.includes(subdomain)) {
-        const currentOverlay = document.getElementById('sndt-modal-overlay');
+        const currentOverlay = document.getElementById('sntk-modal-overlay');
         if (currentOverlay) {
             currentOverlay.remove();
             return;
         }
         const overlay = document.createElement('div');
         const modal = document.createElement('div');
-        overlay.id = 'sndt-modal-overlay';
+        overlay.id = 'sntk-modal-overlay';
 
         const globalSearchOptions = [
             { id: 'sys_properties', label: 'System Properties ➚', title: 'Search sys_properties by name' },
@@ -59,9 +59,9 @@
 
         modal.innerHTML = `
             <div style="background-color: #032D42; color: white; padding: 20px 30px 19px 30px; font-weight: 600; font-size: 17px; line-height: 1.2;">
-                <a href="https://sites.google.com/view/sn-devtools" target="_blank"
+                <a href="https://sites.google.com/view/sn-toolkit" target="_blank"
                     style="color: white; text-decoration: none; cursor: pointer;">
-                    SN DevTools
+                    SN Toolkit
                 </a>
             </div>
             <div style="padding: 25px; background: #F5F5F5;">
@@ -73,16 +73,16 @@
                     </p>
                 </div>
                 <div style="margin-top: 15px; display: flex; gap: 10px; align-items: center;">
-                    <input type="text" id="sndt-search-input" placeholder="Global Search" list="common-queries" style="flex: 1; padding: 10px 15px; border: 1px solid #ccc; border-radius: 25px; font-size: 12px; font-weight: bold; font-family: inherit; outline: none; color: #333;" />
+                    <input type="text" id="sntk-search-input" placeholder="Global Search" list="common-queries" style="flex: 1; padding: 10px 15px; border: 1px solid #ccc; border-radius: 25px; font-size: 12px; font-weight: bold; font-family: inherit; outline: none; color: #333;" />
                     <datalist id="common-queries"></datalist>
-                    <button id="sndt-search-btn" title="Global Search\nPress Enter\n\n- Record numbers (e. g. INC0000001, CHG0000001)\n- Table processors (e. g. task.LIST, task.FILTER, task.DO, task.CONFIG)\n- Users (Search by email)\n- Dictionary Entries (Search by table.field)\n- Text search"
+                    <button id="sntk-search-btn" title="Global Search\nPress Enter\n\n- Record numbers (e. g. INC0000001, CHG0000001)\n- Table processors (e. g. task.LIST, task.FILTER, task.DO, task.CONFIG)\n- Users (Search by email)\n- Dictionary Entries (Search by table.field)\n- Text search"
                         style="background-color: #032D42; color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-size: 12px; font-weight: bold; font-family: inherit;">
                         SEARCH
                     </button>
                 </div>
                 <div style="display: flex; gap: 10px; align-items: center;">
                     <span id="searchInputMsg" style="display: none; font-size: 10px; font-weight: bold; color: #dc3545; margin: 8px 0px 0px 15px;">Search query is empty</span>
-                    <span id="extendedGlobalSearch" title="Extended Global Search\nPress Shift + Enter\n\n- Search ServiceNow Documentation\n- System Properties (Search by name)\n- Local Update Sets (Search by name)\n- Retrieved Update Sets (Search by name)\n- Tables (Search by name or label)\n- Business Rules (Search by name)\n- Scheduled Jobs (Search by name)\n- Script Includes (Search by name)\n- Assignment Rules (Search by name)\n- Client Scripts (Search by name)\n- UI Actions (Search by name or action_name)\n- Service Offerings (Search by name)\n- Record Producers (Search by name)\n- Groups (Search by name)\n- Users (Search by name, user_name, or email)"
+                    <span id="extendedGlobalSearch" title="Extended Global Search\nPress Shift + Enter\n\n- Search ServiceNow Documentation\n- System Properties (Search by name)\n- Local Update Sets (Search by name)\n- Retrieved Update Sets (Search by name)\n- Tables (Search by name or label)\n- Business Rules (Search by name)\n- Scheduled Jobs (Search by name)\n- Script Includes (Search by name)\n- Assignment Rules (Search by name)\n- Client Scripts (Search by name)\n- UI Actions (Search by name or action_name)\n- Business Services (Search by name)\n- Service Offerings (Search by name)\n- Record Producers (Search by name)\n- Groups (Search by name)\n- Users (Search by name, user_name, or email)"
                         style="font-size: 10px; font-weight: bold; color: #032D42; margin: 8px 15px 0px auto; cursor: pointer;">Global Search Options</span>
                 </div>
                 <div id="extendedGlobalSearchDiv" style="display: none; margin-top: 15px; max-height: 300px; overflow-y: auto; color: #032D42;">
@@ -98,6 +98,7 @@
                 </div>
                 <div id="shortcutsDiv" style="margin-top: 15px; max-height: 300px; overflow-y: auto; color: #032D42;">
                     <ul style="list-style: none; padding: 0; margin: 0; font-weight: bold; font-size: 12px;">
+                        <li style="padding: 5px 10px"><a id="sntkToggleNavigationBtn" href="#" title="Toggle navigation bar / banner frame" style="color: #032D42; text-decoration: none;">Toggle navigation bar</a></li>
                         ${shortcutLinks.map(link => link.isHeader
             ? `<li style="padding: 5px 10px; margin-top: 15px; color: #777777">${link.label}</li>`
             : `<li style="padding: 5px 10px"><a href="${origin}${link.path}" style="color: #032D42; text-decoration: none;" target="_blank">${link.label}</a></li>`
@@ -134,7 +135,7 @@
 
         overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
 
-        const globalSearch = document.getElementById('sndt-search-input');
+        const globalSearch = document.getElementById('sntk-search-input');
         globalSearch.focus();
 
         const SYSID_REGEX = /^[0-9a-f]{32}$/i;
@@ -231,7 +232,7 @@
             searchInputMsg.textContent = message;
         }
 
-        document.getElementById('sndt-search-btn').onclick = () => {
+        document.getElementById('sntk-search-btn').onclick = () => {
             const query = globalSearch.value.trim().toLowerCase();
             if (query == '') {
                 setSearchInputMsg('Search query is empty');
@@ -480,12 +481,39 @@
                 if (e.shiftKey) {
                     toggleExtendedGlobalSearch();
                 } else {
-                    document.getElementById('sndt-search-btn').click();
+                    document.getElementById('sntk-search-btn').click();
                 }
             }
         };
 
-        const elements = document.querySelectorAll('#sndt-modal-overlay *');
+        document.getElementById('sntkToggleNavigationBtn').onclick = (e) => {
+            e.preventDefault();
+            let url = new URL(window.location.href);
+            let targetPath = '';
+            const CLASSIC_UI_STR = 'nav_to.do?uri=';
+            const POLARIS_UI_STR = 'now/nav/ui/classic/params/target/';
+            const navtoIndex = url.href.indexOf(CLASSIC_UI_STR);
+            const polarisIndex = url.href.indexOf(POLARIS_UI_STR);
+
+            if (navtoIndex > -1 || polarisIndex > -1) {
+                if (navtoIndex > -1) {
+                    targetPath = decodeURIComponent(url.searchParams.get('uri') || '');
+                } else {
+                    const pathSuffix = url.pathname.split(POLARIS_UI_STR)[1];
+                    targetPath = decodeURIComponent(pathSuffix + url.search);
+                }
+                if (targetPath) {
+                    window.location.href = url.origin + (targetPath.startsWith('/') ? '' : '/') + targetPath;
+                }
+            } else {
+                const pathName = url.pathname.replace(/^\//, '');
+                const fullPath = pathName + url.search;
+                const newURL = `${url.origin}/nav_to.do?uri=${encodeURIComponent(fullPath)}`;
+                window.location.href = newURL;
+            }
+        };
+
+        const elements = document.querySelectorAll('#sntk-modal-overlay *');
         elements.forEach((element) => {
             const isTextInput = element.tagName === 'INPUT' && element.type === 'text';
             const isTextArea = element.tagName === 'TEXTAREA';
