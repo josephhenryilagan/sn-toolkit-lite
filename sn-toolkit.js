@@ -90,8 +90,8 @@
                         <li id="servicenow_search_engine" style="padding: 5px 10px; cursor: pointer;" title="Search the official ServiceNow documentation and community forums">Search ServiceNow Documentation ➚</li>
                         ${globalSearchOptions.map(item => `
                             <li style="padding: 5px 10px;">
-                                <span id="search_${item.id}" title="${item.title}" style="margin-right: 15px; cursor: pointer;">${item.label}</span>
-                                <span id="search_${item.id}_list" title="${item.title}" style="cursor: pointer;">Run filter ➚</span>
+                                <span id="search_${item.id}" title="${item.title}&#10;Opens the record directly" style="margin-right: 15px; cursor: pointer;">${item.label}</span>
+                                <span id="search_${item.id}_list" title="${item.title}&#10;Opens a filtered list" style="cursor: pointer;">Run filter ➚</span>
                             </li>
                         `).join('')}
                     </ul>
