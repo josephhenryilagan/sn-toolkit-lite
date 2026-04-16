@@ -25,6 +25,7 @@
             { id: 'cmdb_ci_service_business', label: 'Business Services ➚', title: 'Search cmdb_ci_service_business by name' },
             { id: 'service_offering', label: 'Service Offerings ➚', title: 'Search service_offering by name' },
             { id: 'sc_cat_item_producer', label: 'Record Producers ➚', title: 'Search sc_cat_item_producer by name' },
+            { id: 'sc_cat_item', label: 'Catalog Items ➚', title: 'Search sc_cat_item by name' },
             { id: 'sys_user_group', label: 'Groups ➚', title: 'Search sys_user_group by name' },
             { id: 'sys_user', label: 'Users ➚', title: 'Search sys_user by name, user_name, or email' }
         ];
@@ -233,6 +234,7 @@
         }
 
         document.getElementById('sntk-search-btn').onclick = () => {
+            const original = globalSearch.value.trim();
             const query = globalSearch.value.trim().toLowerCase();
             if (query == '') {
                 setSearchInputMsg('Search query is empty');
@@ -271,7 +273,7 @@
                     let [table, field] = query.split('.');
                     newURL = `${window.location.origin}/sys_dictionary.do?sysparm_query=name=${encodeURIComponent(table)}^element=${encodeURIComponent(field)}`;
                 } else {
-                    newURL = getTextSearchURL(window.location.origin, query);
+                    newURL = getTextSearchURL(window.location.origin, original);
                 }
                 if (newURL) {
                     window.open(newURL, '_blank');
@@ -333,6 +335,7 @@
         document.getElementById('search_cmdb_ci_service_business').onclick = () => extendedGlobalSearch('cmdb_ci_service_business');
         document.getElementById('search_service_offering').onclick = () => extendedGlobalSearch('service_offering');
         document.getElementById('search_sc_cat_item_producer').onclick = () => extendedGlobalSearch('sc_cat_item_producer');
+        document.getElementById('search_sc_cat_item').onclick = () => extendedGlobalSearch('sc_cat_item');
         document.getElementById('search_sys_user_group').onclick = () => extendedGlobalSearch('sys_user_group');
 
         document.getElementById('search_sys_properties_list').onclick = () => extendedGlobalSearch('sys_properties_list');
@@ -345,6 +348,7 @@
         document.getElementById('search_cmdb_ci_service_business_list').onclick = () => extendedGlobalSearch('cmdb_ci_service_business_list');
         document.getElementById('search_service_offering_list').onclick = () => extendedGlobalSearch('service_offering_list');
         document.getElementById('search_sc_cat_item_producer_list').onclick = () => extendedGlobalSearch('sc_cat_item_producer_list');
+        document.getElementById('search_sc_cat_item_list').onclick = () => extendedGlobalSearch('sc_cat_item_list');
         document.getElementById('search_sys_user_group_list').onclick = () => extendedGlobalSearch('sys_user_group_list');
 
         document.getElementById('search_sys_remote_update_set_list').onclick = () => {
@@ -435,7 +439,7 @@
                     return false;
                 }
             }
-            if (suggestions.length < 6 && TABLE_REGEX.test(`${query}_list.do`)) {
+            if (suggestions.length < 6 && TABLE_REGEX.test(`${query}_list.do`) && !SYSID_REGEX.test(query)) {
                 for (const value of suffixes) {
                     if (!suggestions.includes(`${query}${value}`)) {
                         suggestions.push(`${query}${value}`);
