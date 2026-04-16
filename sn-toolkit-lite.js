@@ -136,7 +136,18 @@
 
         overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
 
+        function getSelectedText() {
+            let text = '';
+            if (window.getSelection) {
+                text = window.getSelection().toString();
+            } else if (document.selection && document.selection.type !== 'Control') {
+                text = document.selection.createRange().text;
+            }
+            return text;
+        }
+
         const globalSearch = document.getElementById('sntk-search-input');
+        globalSearch.value = getSelectedText();
         globalSearch.focus();
 
         const SYSID_REGEX = /^[0-9a-f]{32}$/i;
